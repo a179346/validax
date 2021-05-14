@@ -1,0 +1,12 @@
+node_modules/
+src/
+.eslintrc.json
+.gitignore
+README.md
+tsconfig.json
+
+test.d.ts
+test.js
+test.js.map
+
+test/
