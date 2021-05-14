@@ -5,7 +5,7 @@ type ObjectType<T> = {
 }
 
 export class Validax {
-  static assert<T extends ObjectType<any>> (input: any, schema: T): asserts input is InstanceType<T> {
+  private static assertHelper<T extends ObjectType<any>> (input: any, schema: T, rootClassName:string): asserts input is InstanceType<T> {
     const className = schema.name;
     const validators = constraintMap[className];
     if (validators) {
@@ -14,17 +14,20 @@ export class Validax {
       for (const propName in validators) {
         if (Object.prototype.hasOwnProperty.call(validators, propName)) {
           for (const constraint of validators[propName]) {
-            if (!constraint.checkFunction(input[propName]))
-              throw constraint.error;
+            constraint.assertFunction(input[propName], rootClassName, [ propName ]);
           }
         }
       }
     }
     if (Object.getPrototypeOf(schema)?.name)
-      Validax.assert(input, Object.getPrototypeOf(schema));
+      Validax.assertHelper(input, Object.getPrototypeOf(schema), rootClassName);
   }
 
-  static validate<T extends ObjectType<any>> (input: any, schema: T): input is InstanceType<T> {
+  public static assert<T extends ObjectType<any>> (input: any, schema: T): asserts input is InstanceType<T> {
+    Validax.assertHelper(input, schema, schema.name);
+  }
+
+  public static validate<T extends ObjectType<any>> (input: any, schema: T): input is InstanceType<T> {
     try {
       Validax.assert(input, schema);
       return true;

@@ -1,14 +1,19 @@
 import { Validax, CustomConstraint, ValidaxSchema } from './index';
 
+const StringContsraint = new CustomConstraint((val, className, propNames) => {
+  if (typeof val !== 'string')
+    throw new Error(className + '[' + propNames.join('][') + '] must be a string');
+});
+
 @ValidaxSchema()
 class TodoList {
-  @new CustomConstraint((val) => typeof val === 'string', new Error('title isn\'t a string.')).Decorator
+  @StringContsraint.Decorator
   title!: string;
 }
 
 @ValidaxSchema()
 class ExtendedTodoList extends TodoList {
-  @new CustomConstraint((val) => typeof val === 'string', new Error('message isn\'t a string.')).Decorator
+  @StringContsraint.Decorator
   message!: string;
 }
 

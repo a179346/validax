@@ -1,27 +1,23 @@
 import { constraintMap } from './constraintMap';
 
-type CheckFunction = (val: any)=>boolean
+type AssertFunction = (val: any, className: string, propNames: string[])=> void | never
 
 export class CustomConstraint {
-  /** @internal */
-  public readonly error: Error;
-  // /** @internal */
-  public readonly checkFunction: CheckFunction;
+  public readonly assertFunction: AssertFunction;
 
-  constructor (checkFunction: CheckFunction, error: Error) {
-    this.checkFunction = checkFunction;
-    this.error = error;
+  constructor (assertFunction: AssertFunction) {
+    this.assertFunction = assertFunction;
   }
 
   get Decorator (): PropertyDecorator {
-    return (target: any, propertyKey: string | symbol) => {
-      if (typeof propertyKey !== 'string') return;
+    return (target: any, propName: string | symbol) => {
+      if (typeof propName !== 'string') return;
       const className = target.constructor.name;
       if (!constraintMap[className])
         constraintMap[className] = {};
-      if (!constraintMap[className][propertyKey])
-        constraintMap[className][propertyKey] = [];
-      constraintMap[className][propertyKey].push(this);
+      if (!constraintMap[className][propName])
+        constraintMap[className][propName] = [];
+      constraintMap[className][propName].push(this);
     };
   }
 }
