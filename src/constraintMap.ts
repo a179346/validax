@@ -1,6 +1,6 @@
 import { CustomConstraint } from './CustomConstraint';
 
-export const registeredValidators: {
+export const constraintMap: {
   [className: string]: {
     [propName: string]: CustomConstraint[]
   }

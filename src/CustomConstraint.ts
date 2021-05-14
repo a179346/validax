@@ -1,12 +1,12 @@
-import { registeredValidators } from './registeredValidators';
+import { constraintMap } from './constraintMap';
 
 type CheckFunction = (val: any)=>boolean
 
 export class CustomConstraint {
   /** @internal */
-  public error: Error;
-  /** @internal */
-  public checkFunction: CheckFunction;
+  public readonly error: Error;
+  // /** @internal */
+  public readonly checkFunction: CheckFunction;
 
   constructor (checkFunction: CheckFunction, error: Error) {
     this.checkFunction = checkFunction;
@@ -17,11 +17,11 @@ export class CustomConstraint {
     return (target: any, propertyKey: string | symbol) => {
       if (typeof propertyKey !== 'string') return;
       const className = target.constructor.name;
-      if (!registeredValidators[className])
-        registeredValidators[className] = {};
-      if (!registeredValidators[className][propertyKey])
-        registeredValidators[className][propertyKey] = [];
-      registeredValidators[className][propertyKey].push(this);
+      if (!constraintMap[className])
+        constraintMap[className] = {};
+      if (!constraintMap[className][propertyKey])
+        constraintMap[className][propertyKey] = [];
+      constraintMap[className][propertyKey].push(this);
     };
   }
 }

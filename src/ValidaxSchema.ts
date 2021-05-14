@@ -1,8 +1,8 @@
-import { registeredValidators } from './registeredValidators';
+import { constraintMap } from './constraintMap';
 
 export function ValidaxSchema (): ClassDecorator {
   return function (target: any): void {
     const className = target.name;
-    if (className && !registeredValidators[className]) registeredValidators[className] = {};
+    if (className && !constraintMap[className]) constraintMap[className] = {};
   };
 }

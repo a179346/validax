@@ -6,13 +6,19 @@ class TodoList {
   title!: string;
 }
 
+@ValidaxSchema()
+class ExtendedTodoList extends TodoList {
+  @new CustomConstraint((val) => typeof val === 'string', new Error('message isn\'t a string.')).Decorator
+  message!: string;
+}
+
 function userInput (input: any) {
-  if (Validax.validate(input, TodoList)) {
-    // input is TodoList here ...
-    input.title;
-  }
+  Validax.assert(input, ExtendedTodoList);
+  // input is ExtendedTodoList here ...
+  input.title;
 }
 
 userInput({
-  title: '123'
+  title: '123',
+  message: '456',
 });
