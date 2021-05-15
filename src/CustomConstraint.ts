@@ -1,10 +1,16 @@
 import { constraintMap } from './constraintMap';
 
+/**
+ * return void when type check is pass
+ * throw error when type check is failed
+ */
 type AssertFunction = (val: any, className: string, propNames: string[])=> void | never
 
 export class CustomConstraint {
   public readonly assertFunction: AssertFunction;
-
+  /**
+   * make a custom constraint
+   */
   constructor (assertFunction: AssertFunction) {
     this.assertFunction = assertFunction;
   }
