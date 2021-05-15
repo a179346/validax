@@ -1,7 +1,7 @@
 import { CustomConstraint } from './CustomConstraint';
 
 export const constraintMap: {
-  [className: string]: {
+  [validaxClassId: string]: {
     [propName: string]: CustomConstraint[]
   }
 } = {};

@@ -1,4 +1,7 @@
 import { constraintMap } from './constraintMap';
+import { Lib } from './Lib/Lib';
+
+let constraintIdCounter = 0;
 
 /**
  * return void when type check is pass
@@ -7,23 +10,27 @@ import { constraintMap } from './constraintMap';
 type AssertFunction = (val: any, className: string, propNames: string[])=> void | never
 
 export class CustomConstraint {
+  protected readonly constraintId: number;
   public readonly assertFunction: AssertFunction;
   /**
    * make a custom constraint
    */
   constructor (assertFunction: AssertFunction) {
+    constraintIdCounter += 1;
+    this.constraintId = constraintIdCounter;
     this.assertFunction = assertFunction;
   }
 
-  get Decorator (): PropertyDecorator {
+  Decorator (): PropertyDecorator {
     return (target: any, propName: string | symbol) => {
       if (typeof propName !== 'string') return;
-      const className = target.constructor.name;
-      if (!constraintMap[className])
-        constraintMap[className] = {};
-      if (!constraintMap[className][propName])
-        constraintMap[className][propName] = [];
-      constraintMap[className][propName].push(this);
+      Lib.checkValidaxClassId(target.constructor);
+      const validaxClassId = target.constructor.validaxClassId;
+      if (!constraintMap[validaxClassId])
+        constraintMap[validaxClassId] = {};
+      if (!constraintMap[validaxClassId][propName])
+        constraintMap[validaxClassId][propName] = [];
+      constraintMap[validaxClassId][propName].push(this);
     };
   }
 }

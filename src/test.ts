@@ -6,29 +6,29 @@ const StringContsraint = new CustomConstraint((val, className, propNames) => {
 });
 @ValidaxSchema()
 class TodoListSubMetadata {
-  @StringContsraint.Decorator
+  @StringContsraint.Decorator()
   subId!: string;
 }
 
 @ValidaxSchema()
 class TodoListMetadata {
-  @StringContsraint.Decorator
+  @StringContsraint.Decorator()
   id!: string;
-  @ConstraintBuilder.Class(TodoListSubMetadata).Decorator
+  @ConstraintBuilder.Class(TodoListSubMetadata).Decorator()
   submetadata!: TodoListSubMetadata;
 }
 
 @ValidaxSchema()
 class TodoList {
-  @StringContsraint.Decorator
+  @StringContsraint.Decorator()
   title!: string;
-  @ConstraintBuilder.Class(TodoListMetadata).Decorator
+  @ConstraintBuilder.Class(TodoListMetadata).Decorator()
   metadata!: TodoListMetadata;
 }
 
 @ValidaxSchema()
 class ExtendedTodoList extends TodoList {
-  @StringContsraint.Decorator
+  @StringContsraint.Decorator()
   message!: string;
 }
 
