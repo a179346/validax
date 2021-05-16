@@ -8,7 +8,7 @@ type ArrayOfConstraintOptions = {
   minLength?: number,
 }
 
-export function ArrayOf (constraint: CustomConstraint, options?: ArrayOfConstraintOptions) {
+export function ArrayOf (constraint: CustomConstraint, options?: ArrayOfConstraintOptions): CustomConstraint {
   return new CustomConstraint(function (val: any, className: string, propNames: string[]) {
     const propertyPath = Lib.formatPropertyPath(className, propNames);
     if (options?.allowNull && val === null)

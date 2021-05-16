@@ -10,7 +10,7 @@ let constraintIdCounter = 0;
 type AssertFunction = (val: any, className: string, propNames: string[])=> void | never
 
 export class CustomConstraint {
-  protected readonly constraintId: number;
+  public readonly constraintId: number;
   public readonly assertFunction: AssertFunction;
   /**
    * make a custom constraint

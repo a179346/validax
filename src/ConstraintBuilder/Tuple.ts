@@ -1,3 +1,4 @@
+import { ConstraintCache } from '../ConstraintCache';
 import { CustomConstraint } from '../CustomConstraint';
 import { Lib } from '../Lib/Lib';
 
@@ -6,8 +7,19 @@ type TupleConstraintOptions = {
   allowUndefined?: boolean,
 }
 
-export function Tuple (constraints: CustomConstraint[], options?: TupleConstraintOptions) {
-  return new CustomConstraint(function (val: any, className: string, propNames: string[]) {
+export function Tuple (constraints: CustomConstraint[], options?: TupleConstraintOptions): CustomConstraint {
+  const constraintCacheKey = JSON.stringify({
+    type: 'Tuple',
+    opt: {
+      constraintIds: constraints.map((c) => c.constraintId),
+      allowNull: options?.allowNull || undefined,
+      allowUndefined: options?.allowUndefined || undefined,
+    }
+  });
+  const cacheValue = ConstraintCache.get(constraintCacheKey);
+  if (cacheValue) return cacheValue;
+
+  const retConstraint = new CustomConstraint(function (val: any, className: string, propNames: string[]) {
     const propertyPath = Lib.formatPropertyPath(className, propNames);
     if (options?.allowNull && val === null)
       return;
@@ -19,4 +31,7 @@ export function Tuple (constraints: CustomConstraint[], options?: TupleConstrain
       constraints[i].assertFunction(val[i], className, [ ...propNames, i.toString() ]);
     }
   });
+
+  ConstraintCache.set(constraintCacheKey, retConstraint);
+  return retConstraint;
 }

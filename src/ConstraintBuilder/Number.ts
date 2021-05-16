@@ -1,3 +1,4 @@
+import { ConstraintCache } from '../ConstraintCache';
 import { CustomConstraint } from '../CustomConstraint';
 import { Lib } from '../Lib/Lib';
 
@@ -11,8 +12,23 @@ type NumberConstraintOptions = {
   min?: number,
 }
 
-export function NumberConstraint (options?: NumberConstraintOptions) {
-  return new CustomConstraint(function (val: any, className: string, propNames: string[]) {
+export function NumberConstraint (options?: NumberConstraintOptions): CustomConstraint {
+  const constraintCacheKey = JSON.stringify({
+    type: 'Number',
+    opt: {
+      allowNull: options?.allowNull || undefined,
+      allowUndefined: options?.allowUndefined || undefined,
+      allowNaN: options?.allowNaN || undefined,
+      isFinite: options?.isFinite || undefined,
+      isInterger: options?.isInterger || undefined,
+      max: typeof (options?.max) === 'number' ? options.max : undefined,
+      min: typeof (options?.min) === 'number' ? options.min : undefined,
+    }
+  });
+  const cacheValue = ConstraintCache.get(constraintCacheKey);
+  if (cacheValue) return cacheValue;
+
+  const retConstraint = new CustomConstraint(function (val: any, className: string, propNames: string[]) {
     const propertyPath = Lib.formatPropertyPath(className, propNames);
     if (options?.allowNull && val === null)
       return;
@@ -35,4 +51,7 @@ export function NumberConstraint (options?: NumberConstraintOptions) {
         throw new Error(propertyPath + ' not match min:' + options.min);
     }
   });
+
+  ConstraintCache.set(constraintCacheKey, retConstraint);
+  return retConstraint;
 }
