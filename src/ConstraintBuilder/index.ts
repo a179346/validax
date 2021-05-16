@@ -4,7 +4,7 @@ import { NumberConstraint } from './Number';
 import { BooleanConstraint } from './Boolean';
 import { inParallel } from './inParallel';
 import { inSeries } from './inSeries';
-import { isIn } from './isIn';
+import { isOneOf } from './isOneOf';
 import { ArrayOf } from './ArrayOf';
 import { Tuple } from './Tuple';
 import { CustomError } from './CustomError';
@@ -17,7 +17,7 @@ export const ConstraintBuilder = {
   CustomError,
   inParallel,
   inSeries,
-  isIn,
+  isOneOf,
   ArrayOf,
   Tuple,
 };

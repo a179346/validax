@@ -9,7 +9,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "ts-node src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -b -r ts-node/register ./src/test/index.test.ts"
   },
   "repository": {
     "type": "git",
@@ -36,6 +36,8 @@
   },
   "homepage": "https://github.com/a179346/validax#readme",
   "devDependencies": {
+    "@types/chai": "^4.2.18",
+    "@types/mocha": "^8.2.2",
     "@types/node": "^15.0.3",
     "@typescript-eslint/eslint-plugin": "^4.23.0",
     "@typescript-eslint/parser": "^4.23.0",

@@ -7,7 +7,7 @@ type NumberConstraintOptions = {
   allowUndefined?: boolean,
   allowNaN?: boolean,
   isFinite?: boolean,
-  isInterger?: boolean,
+  isInteger?: boolean,
   max?: number,
   min?: number,
 }
@@ -20,7 +20,7 @@ export function NumberConstraint (options?: NumberConstraintOptions): CustomCons
       allowUndefined: options?.allowUndefined || undefined,
       allowNaN: options?.allowNaN || undefined,
       isFinite: options?.isFinite || undefined,
-      isInterger: options?.isInterger || undefined,
+      isInteger: options?.isInteger || undefined,
       max: typeof (options?.max) === 'number' ? options.max : undefined,
       min: typeof (options?.min) === 'number' ? options.min : undefined,
     }
@@ -34,13 +34,13 @@ export function NumberConstraint (options?: NumberConstraintOptions): CustomCons
       return;
     if (options?.allowUndefined && val === undefined)
       return;
-    if (options?.allowNaN && isNaN(val))
+    if (options?.allowNaN && isNaN(val) && typeof val === 'number')
       return;
-    if (typeof val !== 'number')
+    if (isNaN(val) || typeof val !== 'number')
       throw new Error(propertyPath + ' must be a number');
     if (options?.isFinite && !Number.isFinite(val))
       throw new Error(propertyPath + ' isn\'t finite.');
-    if (options?.isInterger && !Number.isInteger(val))
+    if (options?.isInteger && !Number.isInteger(val))
       throw new Error(propertyPath + ' must be an integer');
     if (typeof (options?.max) === 'number') {
       if (val > options.max)
