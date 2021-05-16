@@ -6,6 +6,7 @@ import { inParallel } from './inParallel';
 import { inSeries } from './inSeries';
 import { isIn } from './isIn';
 import { ArrayOf } from './ArrayOf';
+import { Tuple } from './Tuple';
 
 export const ConstraintBuilder = {
   inParallel,
@@ -16,4 +17,5 @@ export const ConstraintBuilder = {
   Boolean: BooleanConstraint,
   isIn,
   ArrayOf,
+  Tuple,
 };
