@@ -7,14 +7,16 @@ import { inSeries } from './inSeries';
 import { isIn } from './isIn';
 import { ArrayOf } from './ArrayOf';
 import { Tuple } from './Tuple';
+import { CustomError } from './CustomError';
 
 export const ConstraintBuilder = {
-  inParallel,
-  inSeries,
-  Class: ClassConstraint,
   String: StringConstraint,
   Number: NumberConstraint,
   Boolean: BooleanConstraint,
+  Class: ClassConstraint,
+  CustomError,
+  inParallel,
+  inSeries,
   isIn,
   ArrayOf,
   Tuple,
