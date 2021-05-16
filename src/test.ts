@@ -1,9 +1,6 @@
-import { Validax, CustomConstraint, ValidaxSchema, ConstraintBuilder } from './index';
+import { Validax, ValidaxSchema, ConstraintBuilder } from './index';
 
-const StringContsraint = new CustomConstraint((val, className, propNames) => {
-  if (typeof val !== 'string')
-    throw new Error(className + '[' + propNames.join('][') + '] must be a string');
-});
+const StringContsraint = ConstraintBuilder.String();
 @ValidaxSchema()
 class TodoListSubMetadata {
   @StringContsraint.Decorator()
