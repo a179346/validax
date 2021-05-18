@@ -1,7 +1,9 @@
 import { ObjectType } from '../type/ObjectType';
 
 function formatPropertyPath (rootClassName:string, propNames:string[]) {
-  return rootClassName + '[' + propNames.join('][') + ']';
+  if (propNames.length > 0)
+    return rootClassName + '[' + propNames.join('][') + ']';
+  return rootClassName;
 }
 
 let classIdCounter = 0;
