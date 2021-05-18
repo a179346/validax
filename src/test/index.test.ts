@@ -8,3 +8,4 @@ require('./isOneOf.test.ts');
 require('./inSeries.test.ts');
 require('./ArrayOf.test.ts');
 require('./Tuple.test.ts');
+require('./CustomConstraint.test.ts');
