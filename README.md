@@ -1,6 +1,5 @@
-# Boodmark
+# Bookmark [![Build Status](https://travis-ci.org/a179346/validax.svg?branch=main)](https://travis-ci.org/a179346/validax)
 
-- [Boodmark](#boodmark)
 - [What is validax](#what-is-validax)
 - [Installation](#installation)
 - [Validax](#validax)
