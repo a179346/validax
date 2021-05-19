@@ -21,7 +21,7 @@
     - [1. Experimental support for decorators is a feature that is subject to change in a future release.](#1-experimental-support-for-decorators-is-a-feature-that-is-subject-to-change-in-a-future-release)
     - [2. How to validate a nested object](#2-how-to-validate-a-nested-object)
 # What is validax
-JSON schema validator in Typescript
+A clean way to validate JSON schema in Typescript
 
 ```ts
 import { Validax, ValidaxSchema, ConstraintBuilder } from 'validax';
@@ -187,7 +187,7 @@ class Person {
   name!: string;
 
   @ConstraintBuilder.Class(Person, { allowNull: true }).Decorator()
-  father?: Person;
+  father: Person | null;
 }
 ```
 options<br>
