@@ -5,6 +5,10 @@ src/
 README.md
 tsconfig.json
 
+todolist
+
+.travis.yml
+
 test.d.ts
 test.js
 test.js.map
