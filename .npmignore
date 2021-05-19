@@ -10,3 +10,4 @@ test.js
 test.js.map
 
 test/
+dist/test/
