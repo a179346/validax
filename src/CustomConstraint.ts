@@ -1,4 +1,4 @@
-import { constraintMap } from './constraintMap';
+import { ConstraintMap } from './constraintMap';
 import { Lib } from './Lib/Lib';
 
 let constraintIdCounter = 0;
@@ -26,11 +26,7 @@ export class CustomConstraint {
       if (typeof propName !== 'string') return;
       Lib.checkValidaxClassId(target.constructor);
       const validaxClassId = target.constructor.validaxClassId;
-      if (!constraintMap[validaxClassId])
-        constraintMap[validaxClassId] = {};
-      if (!constraintMap[validaxClassId][propName])
-        constraintMap[validaxClassId][propName] = [];
-      constraintMap[validaxClassId][propName].push(this);
+      ConstraintMap.addConstraint(validaxClassId, propName, this);
     };
   }
 }

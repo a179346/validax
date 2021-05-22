@@ -62,6 +62,50 @@ describe('ConstraintBuilder.Class test', () => {
     });
   });
 
+  describe('error when not object', () => {
+    const testSchema2NotObjectError = new Error('testSchema2 Not Object');
+    @ValidaxSchema(testSchema2NotObjectError)
+    class testSchema2 {
+      @ConstraintBuilder.String().Decorator()
+      title!: string;
+    }
+    const testSchemaNotObjectError = new Error('testSchema Not Object');
+    @ValidaxSchema(testSchemaNotObjectError)
+    class testSchema {
+      @ConstraintBuilder.Class(testSchema2).Decorator()
+      title!: testSchema2;
+    }
+
+    it('pass test', () => {
+      passTest({ title: { title: '123' } }, testSchema);
+      passTest({ title: { title: '' } }, testSchema);
+    });
+
+    it('fail test', () => {
+      failTest({ title: { title: null } }, testSchema);
+      failTest({ title: { title: undefined } }, testSchema);
+      failTest({ title: true }, testSchema, testSchema2NotObjectError);
+      failTest({ title: false }, testSchema, testSchema2NotObjectError);
+      failTest({ title: Infinity }, testSchema, testSchema2NotObjectError);
+      failTest({ title: -Infinity }, testSchema, testSchema2NotObjectError);
+      failTest({ title: -123 }, testSchema, testSchema2NotObjectError);
+      failTest({ title: 1.23 }, testSchema, testSchema2NotObjectError);
+      failTest({ title: 123 }, testSchema, testSchema2NotObjectError);
+      failTest({ title: 0 }, testSchema, testSchema2NotObjectError);
+      failTest({ title: '123' }, testSchema, testSchema2NotObjectError);
+      failTest({ title: '' }, testSchema, testSchema2NotObjectError);
+      failTest({ title: null }, testSchema, testSchema2NotObjectError);
+      failTest({ title: NaN }, testSchema, testSchema2NotObjectError);
+      failTest({ title: undefined }, testSchema, testSchema2NotObjectError);
+      failTest({ title: [ '123' ] }, testSchema);
+      failTest({ title: {} }, testSchema);
+      failTest({ title2: '123' }, testSchema, testSchema2NotObjectError);
+      failTest({ }, testSchema);
+      failTest(null, testSchema, testSchemaNotObjectError);
+      failTest(undefined, testSchema, testSchemaNotObjectError);
+    });
+  });
+
   describe('with options.allowNull', () => {
     @ValidaxSchema()
     class testSchema2 {

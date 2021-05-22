@@ -1,4 +1,4 @@
-import { constraintMap } from './constraintMap';
+import { ConstraintMap } from './constraintMap';
 import { Lib } from './Lib/Lib';
 import { ObjectType } from './type/ObjectType';
 
@@ -7,13 +7,18 @@ export class Validax {
   public static assertHelper<T extends ObjectType<any>> (input: any, schema: T, rootClassName:string, propNames:string[]): asserts input is InstanceType<T> {
     const validaxClassId = schema.validaxClassId;
     if (typeof validaxClassId === 'number') {
-      const validators = constraintMap[validaxClassId];
-      if (validators) {
-        if (!input || typeof input !== 'object')
+      const classConstraintMap = ConstraintMap.getClassConstraintMap(validaxClassId.toString());
+      if (classConstraintMap) {
+        if (!input || typeof input !== 'object') {
+          const errorWhenNotObject = classConstraintMap.getErrorWhenNotObject();
+          if (errorWhenNotObject)
+            throw errorWhenNotObject;
           throw new Error(Lib.formatPropertyPath(rootClassName, propNames) + ' isn\'t an object');
-        for (const propName in validators) {
-          if (Object.prototype.hasOwnProperty.call(validators, propName)) {
-            for (const constraint of validators[propName]) {
+        }
+        const constraints = classConstraintMap.getConstraints();
+        for (const propName in constraints) {
+          if (Object.prototype.hasOwnProperty.call(constraints, propName)) {
+            for (const constraint of constraints[propName]) {
               constraint.assertFunction(input[propName], rootClassName, [ ...propNames, propName ]);
             }
           }
