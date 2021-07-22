@@ -4,6 +4,7 @@ src/
 .gitignore
 README.md
 tsconfig.json
+.github/
 
 todolist
 
