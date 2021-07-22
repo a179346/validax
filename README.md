@@ -6,7 +6,7 @@
   <a href="https://travis-ci.org/a179346/validax" target="_blank">
     <img alt="Documentation" src="https://travis-ci.org/a179346/validax.svg?branch=main" />
   </a>
-  <img alt="Version" src="https://img.shields.io/badge/version-1.6.2-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-1.7.0-blue.svg?cacheSeconds=2592000" />
   <a href="https://github.com/a179346/validax#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
