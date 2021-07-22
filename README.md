@@ -1,9 +1,12 @@
 <h1 align="center"> ⭕ Validax ⭕</h1>
 <p>
+  <a href="https://github.com/a179346/validax/actions/workflows/test.yml" target="_blank">
+    <img alt="Documentation" src="https://github.com/a179346/validax/actions/workflows/test.yml/badge.svg" />
+  </a>
   <a href="https://travis-ci.org/a179346/validax" target="_blank">
     <img alt="Documentation" src="https://travis-ci.org/a179346/validax.svg?branch=main" />
   </a>
-  <img alt="Version" src="https://img.shields.io/badge/version-1.5.0-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-1.6.0-blue.svg?cacheSeconds=2592000" />
   <a href="https://github.com/a179346/validax#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
