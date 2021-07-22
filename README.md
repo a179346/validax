@@ -1,4 +1,6 @@
+<div align="center">
 <h1 align="center"> ⭕ Validax ⭕</h1>
+
 <p>
   <a href="https://github.com/a179346/validax/actions/workflows/test.yml" target="_blank">
     <img alt="Documentation" src="https://github.com/a179346/validax/actions/workflows/test.yml/badge.svg" />
@@ -6,7 +8,9 @@
   <a href="https://travis-ci.org/a179346/validax" target="_blank">
     <img alt="Documentation" src="https://travis-ci.org/a179346/validax.svg?branch=main" />
   </a>
-  <img alt="Version" src="https://img.shields.io/badge/version-1.7.0-blue.svg?cacheSeconds=2592000" />
+  <a href="https://www.npmjs.com/package/validax" target="_blank">
+    <img alt="Documentation" src="https://img.shields.io/npm/v/validax?maxAge=3600)" />
+  </a>
   <a href="https://github.com/a179346/validax#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
@@ -17,6 +21,7 @@
     <img alt="License: MIT" src="https://img.shields.io/github/license/a179346/validax" />
   </a>
 </p>
+</div>
 
 > A clean way to validate JSON schema in Typescript
 
