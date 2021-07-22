@@ -1,5 +1,25 @@
-# Bookmark [![Build Status](https://travis-ci.org/a179346/validax.svg?branch=main)](https://travis-ci.org/a179346/validax)
+<h1 align="center"> ⭕ Validax ⭕</h1>
+<p>
+  <a href="https://travis-ci.org/a179346/validax" target="_blank">
+    <img alt="Documentation" src="https://travis-ci.org/a179346/validax.svg?branch=main" />
+  </a>
+  <img alt="Version" src="https://img.shields.io/badge/version-1.5.0-blue.svg?cacheSeconds=2592000" />
+  <a href="https://github.com/a179346/validax#readme" target="_blank">
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
+  </a>
+  <a href="https://github.com/a179346/validax/graphs/commit-activity" target="_blank">
+    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
+  </a>
+  <a href="https://github.com/a179346/validax/blob/master/LICENSE" target="_blank">
+    <img alt="License: MIT" src="https://img.shields.io/github/license/a179346/validax" />
+  </a>
+</p>
 
+> A clean way to validate JSON schema in Typescript
+
+# Bookmark
+
+- [Bookmark](#bookmark)
 - [What is validax](#what-is-validax)
 - [Installation](#installation)
 - [Validax](#validax)
@@ -17,6 +37,7 @@
   - [ArrayOf](#arrayof)
   - [Tuple](#tuple)
 - [CustomConstraint](#customconstraint)
+- [validateOptions](#validateoptions)
 - [Common issues](#common-issues)
     - [1. Experimental support for decorators is a feature that is subject to change in a future release.](#1-experimental-support-for-decorators-is-a-feature-that-is-subject-to-change-in-a-future-release)
     - [2. How to validate a nested object](#2-how-to-validate-a-nested-object)
@@ -53,9 +74,12 @@ npm install validax
 # Validax
 ## assert
 
-> `Validax.assert(input, schema)` -> `asserts input is schema`
+> `Validax.assert(input, schema[, validateOptions])` -> `asserts input is schema`
  
 assert input data match schema
+
+reference: [validateOptions](#validateoptions)
+
 ```ts
 import { Validax, ValidaxSchema, ConstraintBuilder } from 'validax';
 
@@ -76,9 +100,12 @@ function userInput (input: any) {
 ```
 ## validate
 
-> `Validax.validate(input, schema)` -> `input is schema`
+> `Validax.validate(input, schema[, validateOptions])` -> `input is schema`
  
 validate input data is schema
+
+reference: [validateOptions](#validateoptions)
+
 ```ts
 import { Validax, ValidaxSchema, ConstraintBuilder } from 'validax';
 
@@ -348,7 +375,16 @@ Type: `AssertFunction`
  * return void when type check is pass
  * throw error when type check is failed
  */
-type AssertFunction = (val: any, className: string, propNames: string[])=> void | never
+type AssertFunction = (val: any, className: string, propNames: string[], validateOptions?: validateOptions)=> void | never
+```
+
+# validateOptions
+
+```ts
+interface validateOptions {
+  // not allow other keys in object if true
+  strict?: boolean;
+}
 ```
 
 # Common issues

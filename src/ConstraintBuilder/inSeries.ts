@@ -15,11 +15,10 @@ export function inSeries (constraints: CustomConstraint[]): CustomConstraint {
   const cacheValue = ConstraintCache.get(constraintCacheKey);
   if (cacheValue) return cacheValue;
 
-  const assertFunction = function (val: any, className: string, propNames: string[]) {
+  const retConstraint = new CustomConstraint(function (val, className, propNames, validateOptions) {
     for (const constraint of constraints)
-      constraint.assertFunction(val, className, propNames);
-  };
-  const retConstraint = new CustomConstraint(assertFunction);
+      constraint.assertFunction(val, className, propNames, validateOptions);
+  });
 
   ConstraintCache.set(constraintCacheKey, retConstraint);
   return retConstraint;

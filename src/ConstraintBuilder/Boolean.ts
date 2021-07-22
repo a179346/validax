@@ -18,7 +18,7 @@ export function BooleanConstraint (options?: BooleanConstraintOptions): CustomCo
   const cacheValue = ConstraintCache.get(constraintCacheKey);
   if (cacheValue) return cacheValue;
 
-  const retConstraint = new CustomConstraint(function (val: any, className: string, propNames: string[]) {
+  const retConstraint = new CustomConstraint(function (val, className, propNames) {
     const propertyPath = Lib.formatPropertyPath(className, propNames);
     if (options?.allowNull && val === null)
       return;

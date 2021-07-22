@@ -9,3 +9,4 @@ require('./inSeries.test.ts');
 require('./ArrayOf.test.ts');
 require('./Tuple.test.ts');
 require('./CustomConstraint.test.ts');
+require('./validateOptions.test.ts');

@@ -1,12 +1,11 @@
 import { CustomConstraint } from '../CustomConstraint';
 
 export function CustomError (constraint: CustomConstraint, error: Error): CustomConstraint {
-  const assertFunction = function (val: any, className: string, propNames: string[]) {
+  return new CustomConstraint(function (val, className, propNames, validateOptions) {
     try {
-      constraint.assertFunction(val, className, propNames);
+      constraint.assertFunction(val, className, propNames, validateOptions);
     } catch (err) {
       throw error;
     }
-  };
-  return new CustomConstraint(assertFunction);
+  });
 }

@@ -1,7 +1,7 @@
 import { CustomConstraint } from '../CustomConstraint';
 
 export function isOneOf (availableVals: any[] | Set<any>, error: Error): CustomConstraint {
-  return new CustomConstraint(function (val: any, className: string, propNames: string[]) {
+  return new CustomConstraint(function (val) {
     if (Array.isArray(availableVals)) {
       if (!availableVals.includes(val))
         throw error;

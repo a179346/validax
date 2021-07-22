@@ -21,7 +21,7 @@ export function Tuple (constraints: CustomConstraint[], options?: TupleConstrain
   const cacheValue = ConstraintCache.get(constraintCacheKey);
   if (cacheValue) return cacheValue;
 
-  const retConstraint = new CustomConstraint(function (val: any, className: string, propNames: string[]) {
+  const retConstraint = new CustomConstraint(function (val, className, propNames, validateOptions) {
     const propertyPath = Lib.formatPropertyPath(className, propNames);
     if (options?.allowNull && val === null)
       return;
@@ -32,7 +32,7 @@ export function Tuple (constraints: CustomConstraint[], options?: TupleConstrain
     if (!options?.allowExtraDataLength && val.length > constraints.length)
       throw new Error(propertyPath + '.length is more than constraints.length');
     for (let i = 0;i < constraints.length;i++) {
-      constraints[i].assertFunction(val[i], className, [ ...propNames, i.toString() ]);
+      constraints[i].assertFunction(val[i], className, [ ...propNames, i.toString() ], validateOptions);
     }
   });
 
