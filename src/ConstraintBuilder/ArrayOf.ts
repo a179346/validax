@@ -9,7 +9,7 @@ type ArrayOfConstraintOptions = {
 }
 
 export function ArrayOf (constraint: CustomConstraint, options?: ArrayOfConstraintOptions): CustomConstraint {
-  return new CustomConstraint(function (val: any, className: string, propNames: string[]) {
+  return new CustomConstraint(function (val, className, propNames, validateOptions) {
     const propertyPath = Lib.formatPropertyPath(className, propNames);
     if (options?.allowNull && val === null)
       return;
@@ -26,7 +26,7 @@ export function ArrayOf (constraint: CustomConstraint, options?: ArrayOfConstrai
         throw new Error(propertyPath + ' not match minLength:' + options.minLength);
     }
     for (let i = 0;i < val.length;i++) {
-      constraint.assertFunction(val[i], className, [ ...propNames, i.toString() ]);
+      constraint.assertFunction(val[i], className, [ ...propNames, i.toString() ], validateOptions);
     }
   });
 }

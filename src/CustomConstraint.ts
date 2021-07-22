@@ -1,5 +1,6 @@
 import { ConstraintMap } from './constraintMap';
 import { Lib } from './Lib/Lib';
+import { validateOptions } from './Validax';
 
 let constraintIdCounter = 0;
 
@@ -7,7 +8,7 @@ let constraintIdCounter = 0;
  * return void when type check is pass
  * throw error when type check is failed
  */
-type AssertFunction = (val: any, className: string, propNames: string[])=> void | never
+type AssertFunction = (val: any, className: string, propNames: string[], validateOptions?: validateOptions)=> void | never
 
 export class CustomConstraint {
   public readonly constraintId: number;

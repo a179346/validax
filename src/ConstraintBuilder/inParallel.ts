@@ -5,16 +5,15 @@ import { CustomConstraint } from '../CustomConstraint';
  * should pass one of the constraints (||)
  */
 export function inParallel (constraints: CustomConstraint[], error: Error): CustomConstraint {
-  const assertFunction = function (val: any, className: string, propNames: string[]) {
+  return new CustomConstraint(function (val, className, propNames, validateOptions) {
     for (const constraint of constraints) {
       try {
-        constraint.assertFunction(val, className, propNames);
+        constraint.assertFunction(val, className, propNames, validateOptions);
         return;
       } catch (error) {
         //
       }
     }
     throw error;
-  };
-  return new CustomConstraint(assertFunction);
+  });
 }
