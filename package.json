@@ -34,7 +34,7 @@
   "homepage": "https://github.com/a179346/validax#readme",
   "devDependencies": {
     "@types/chai": "^4.2.21",
-    "@types/mocha": "^8.2.3",
+    "@types/mocha": "^9.0.0",
     "@types/node": "^16.4.0",
     "@typescript-eslint/eslint-plugin": "^4.28.4",
     "@typescript-eslint/parser": "^4.28.4",
